@@ -4,7 +4,7 @@
 
 The **Animated Authentication System** is a stylish client-side login and registration application built using **HTML5, CSS3, and Vanilla JavaScript**.
 
-The project provides a complete authentication flow where users can create an account, securely store their credentials using password hashing, log in with validation, access a protected dashboard, and log out safely.
+The project provides a complete authentication flow wheres users can create an account, securely store their credentials using password hashing, log in with validation, access a protected dashboard, and log out safely.
 
 The interface includes modern animations, colorful gradients, glassmorphism effects, and responsive design.
 
