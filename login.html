@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
 
 <head>
 
-<title>Login</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Secure Login</title>
 
 <link rel="stylesheet" href="style.css">
 
@@ -14,19 +16,20 @@
 <body>
 
 
-<div class="auth-box">
+<div class="auth-card">
 
 
-<h1>🔐 Login</h1>
+<h1>🔐 Secure Login</h1>
 
-<p>Welcome Back!</p>
-
-
-<input id="loginUser"
-placeholder="Username or Email">
+<p>Welcome back</p>
 
 
-<input id="loginPass"
+<input id="loginEmail" 
+type="text"
+placeholder="Email or Username">
+
+
+<input id="loginPassword"
 type="password"
 placeholder="Password">
 
@@ -37,20 +40,21 @@ Login
 </button>
 
 
-<p id="message"></p>
 
+<p id="loginMsg"></p>
 
 
 <a href="register.html">
-Create new account
+Create Account
 </a>
+
 
 
 </div>
 
 
 
-<script src="script.js"></script>
+<script src="app.js"></script>
 
 
 </body>
