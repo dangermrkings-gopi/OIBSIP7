@@ -1,52 +1,55 @@
-// SHA-256 Password Hashing
+// SHA-256 PASSWORD HASHING
 
 async function hashPassword(password){
 
-const data =
+
+let data =
 new TextEncoder()
 .encode(password);
 
 
-const hash =
+
+let hash =
 await crypto.subtle.digest(
 "SHA-256",
 data
 );
 
 
+
 return Array.from(
 new Uint8Array(hash)
 )
-.map(b=>b.toString(16).padStart(2,"0"))
+
+.map(
+x=>x.toString(16)
+.padStart(2,"0")
+)
+
 .join("");
 
 }
 
 
 
-
+// REGISTER
 
 async function register(){
 
 
 let username =
-document.getElementById("regUser").value.trim();
+registerEmail.value.trim();
 
 
 let password =
-document.getElementById("regPass").value;
+registerPassword.value;
 
 
 
-let message =
-document.getElementById("message");
+if(!username || !password){
 
-
-
-if(username==="" || password===""){
-
-message.innerHTML=
-"⚠ Please fill all fields";
+registerMsg.innerHTML =
+"⚠ Fill all fields";
 
 return;
 
@@ -54,12 +57,12 @@ return;
 
 
 
-if(password.length<8 ||
+if(password.length < 8 ||
 !/\d/.test(password)){
 
 
-message.innerHTML=
-"⚠ Password must contain 8 characters and a number";
+registerMsg.innerHTML =
+"⚠ Password requires 8 characters and one number";
 
 
 return;
@@ -76,15 +79,15 @@ localStorage.getItem("users")
 
 
 let exists =
-users.find(
-u=>u.username===username
+users.some(
+user=>user.username===username
 );
 
 
 
 if(exists){
 
-message.innerHTML=
+registerMsg.innerHTML =
 "❌ User already exists";
 
 return;
@@ -93,17 +96,16 @@ return;
 
 
 
-
-let hashed =
+let encrypted =
 await hashPassword(password);
 
 
 
 users.push({
 
-username:username,
+username,
 
-password:hashed
+password:encrypted
 
 });
 
@@ -116,14 +118,13 @@ JSON.stringify(users)
 
 
 
-message.innerHTML=
-"✅ Registration Successful";
+registerMsg.innerHTML =
+"✅ Account Created";
 
 
 setTimeout(()=>{
 
-window.location=
-"login.html";
+location.href="index.html";
 
 },1500);
 
@@ -134,33 +135,29 @@ window.location=
 
 
 
+// LOGIN
+
 
 async function login(){
 
 
 let username =
-document.getElementById("loginUser").value.trim();
+loginEmail.value.trim();
 
 
 let password =
-document.getElementById("loginPass").value;
+loginPassword.value;
 
 
 
-let message =
-document.getElementById("message");
+if(!username || !password){
 
-
-
-if(username==="" || password===""){
-
-message.innerHTML=
-"⚠ Enter username and password";
+loginMsg.innerHTML=
+"⚠ Complete all fields";
 
 return;
 
 }
-
 
 
 
@@ -171,18 +168,16 @@ localStorage.getItem("users")
 
 
 
-let hashed =
+let encrypted =
 await hashPassword(password);
 
 
 
 let user =
 users.find(
-
 u=>
 u.username===username &&
-u.password===hashed
-
+u.password===encrypted
 );
 
 
@@ -190,13 +185,15 @@ u.password===hashed
 if(!user){
 
 
-message.innerHTML=
-"❌ Invalid username or password";
+loginMsg.innerHTML =
+"❌ Invalid login details";
 
 
 return;
 
+
 }
+
 
 
 
@@ -207,27 +204,29 @@ username
 
 
 
-window.location=
+location.href=
 "dashboard.html";
-
 
 }
 
 
 
 
+// PROTECTED PAGE
 
-function checkSession(){
+
+function protectPage(){
 
 
 let session =
 localStorage.getItem("session");
 
 
+
 if(!session){
 
-window.location=
-"login.html";
+location.href=
+"index.html";
 
 return;
 
@@ -235,15 +234,16 @@ return;
 
 
 
-document.getElementById("user")
-.innerHTML=
-"Hello, "+session+" ✨";
+welcome.innerHTML =
+"Hello "+session+" ✨";
 
 
 }
 
 
 
+
+// LOGOUT
 
 
 function logout(){
@@ -254,8 +254,8 @@ localStorage.removeItem(
 );
 
 
-window.location=
-"login.html";
+location.href=
+"index.html";
 
 
 }
