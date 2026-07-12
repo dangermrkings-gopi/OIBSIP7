@@ -7,15 +7,9 @@ box-sizing:border-box;
 }
 
 
-
 body{
 
 height:100vh;
-
-font-family:
-'Segoe UI',
-sans-serif;
-
 
 display:flex;
 
@@ -24,8 +18,11 @@ justify-content:center;
 align-items:center;
 
 
-background:
+font-family:
+Arial,sans-serif;
 
+
+background:
 linear-gradient(
 135deg,
 #667eea,
@@ -34,70 +31,42 @@ linear-gradient(
 );
 
 
-overflow:hidden;
-
-
-}
-
-
-
-/* Animated Background */
-
-
-.background{
-
-position:absolute;
-
-width:100%;
-
-height:100%;
-
-
-background:
-
-radial-gradient(circle,
-#ffffff33 2px,
-transparent 3px);
-
-
-background-size:
-60px 60px;
+background-size:300% 300%;
 
 
 animation:
-move 10s linear infinite;
+gradient 10s infinite;
+
+
+color:white;
 
 
 }
 
 
 
-@keyframes move{
+@keyframes gradient{
 
-from{
+0%{
+background-position:0% 50%;
+}
 
-background-position:
-0 0;
+50%{
+background-position:100% 50%;
+}
+
+100%{
+background-position:0% 50%;
+}
 
 }
 
-to{
-
-background-position:
-500px 500px;
-
-}
-
-}
 
 
 
 
-.auth-box,
+.auth-card,
 .dashboard{
-
-
-position:relative;
 
 
 width:380px;
@@ -106,35 +75,58 @@ width:380px;
 padding:40px;
 
 
-background:
-
-rgba(255,255,255,.15);
-
-
 border-radius:25px;
 
 
+background:
+rgba(255,255,255,.15);
+
+
 backdrop-filter:
-blur(15px);
+blur(20px);
 
 
 box-shadow:
 
-0 0 40px rgba(255,255,255,.4);
+0 0 40px
+rgba(255,255,255,.4);
 
 
 text-align:center;
 
 
-color:white;
-
-
 animation:
-slide 1s ease;
+show 1s;
 
 
 }
 
+
+
+@keyframes show{
+
+from{
+
+opacity:0;
+
+transform:
+translateY(-80px)
+scale(.7);
+
+}
+
+
+to{
+
+opacity:1;
+
+transform:
+translateY(0)
+scale(1);
+
+}
+
+}
 
 
 
@@ -145,8 +137,8 @@ font-size:35px;
 margin-bottom:15px;
 
 text-shadow:
-0 0 15px cyan;
 
+0 0 20px cyan;
 
 }
 
@@ -159,15 +151,15 @@ width:100%;
 
 padding:15px;
 
-margin:12px 0;
+margin:15px 0;
 
 
 border:none;
 
-border-radius:30px;
-
-
 outline:none;
+
+
+border-radius:30px;
 
 
 font-size:16px;
@@ -182,10 +174,7 @@ button{
 
 width:100%;
 
-padding:14px;
-
-
-margin-top:15px;
+padding:15px;
 
 
 border:none;
@@ -223,34 +212,33 @@ button:hover{
 
 
 transform:
-scale(1.08);
+scale(1.1);
 
 
 box-shadow:
 
-0 0 25px cyan;
+0 0 30px cyan;
 
 
 }
+
 
 
 
 a{
 
-
 display:block;
 
 margin-top:20px;
 
-
 color:white;
-
 
 }
 
 
 
-#message{
+#loginMsg,
+#registerMsg{
 
 
 margin-top:15px;
@@ -261,51 +249,24 @@ color:#ffe600;
 
 
 
-
 .dashboard{
+
 
 animation:
 
-glow 2s infinite alternate;
+pulse 2s infinite alternate;
 
 }
 
 
 
-@keyframes slide{
-
-
-from{
-
-opacity:0;
-
-transform:
-translateY(-100px)
-scale(.5);
-
-}
-
-
-to{
-
-opacity:1;
-
-transform:
-translateY(0)
-scale(1);
-
-}
-
-}
-
-
-
-@keyframes glow{
+@keyframes pulse{
 
 
 from{
 
 box-shadow:
+
 0 0 20px cyan;
 
 }
@@ -314,7 +275,8 @@ box-shadow:
 to{
 
 box-shadow:
-0 0 50px pink;
+
+0 0 60px pink;
 
 }
 
@@ -323,16 +285,14 @@ box-shadow:
 
 
 
-/* Mobile */
 
 @media(max-width:500px){
 
-.auth-box,
+.auth-card,
 .dashboard{
 
 width:90%;
 
 }
-
 
 }
